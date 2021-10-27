@@ -18,6 +18,7 @@ public class StartManager : MonoBehaviourPunCallbacks
         else
         {
             PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
 
@@ -31,6 +32,7 @@ public class StartManager : MonoBehaviourPunCallbacks
         else
         {
             PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
 
@@ -44,6 +46,7 @@ public class StartManager : MonoBehaviourPunCallbacks
         else
         {
             PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
 }

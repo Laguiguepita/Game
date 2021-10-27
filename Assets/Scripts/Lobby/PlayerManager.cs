@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -19,10 +20,20 @@ public class PlayerManager : MonoBehaviour
     private int numberOfPosition;
 
     public GameObject CreateAndJoinRooms;
+
+    private Scene currentScene;
     
     void Start()
     {
+        currentScene = SceneManager.GetActiveScene();
         Instance = this;
+        if (currentScene.name == "Game")
+        {
+            Vector2 randomPosition = new Vector3(5,1,5);
+            myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+            myPlayer.transform.Find("GameObject").gameObject.SetActive(true);
+            myPlayer.GetComponent<mouvement>().enabled = true;
+        }
     }
 
     public void InstantiatePlayer()
