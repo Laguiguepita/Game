@@ -27,6 +27,7 @@ public class mouvement : MonoBehaviour
     PhotonView view;
 
     private Animator animator;
+    public float jumpForce = 7;
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,7 @@ public class mouvement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         speed = 15;
         lookSensitivity = 5;
+        
     }
 
 
@@ -58,6 +60,10 @@ public class mouvement : MonoBehaviour
         if(!forwardPressed)
         {
             animator.SetBool("IsWalking",false);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _rigidbody.AddForce(Vector3.up*jumpForce,ForceMode.Impulse);
         }
     }
 
