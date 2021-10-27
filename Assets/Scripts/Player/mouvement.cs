@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class mouvement : MonoBehaviour
 {
@@ -24,28 +25,41 @@ public class mouvement : MonoBehaviour
     
     
     PhotonView view;
+
+    private Animator animator;
     
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         // Récupère le rigidbody dans les composants de l'objet
         _rigidbody = GetComponent<Rigidbody>();
         
         // Enleve le curseur et le fixe au milieu de l'écran
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        speed = 15;
+        lookSensitivity = 5;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        bool iswalking = animator.GetBool("IsWalking");
+        bool forwardPressed = Input.GetKey("w");
         view = GetComponent<PhotonView>();
-        speed = 5;
-        lookSensitivity = 5;
         Move();
         LookAndMove();
+        if (forwardPressed)
+        {
+            animator.SetBool("IsWalking",true);
         }
+        if(!forwardPressed)
+        {
+            animator.SetBool("IsWalking",false);
+        }
+    }
 
 
     private void Move()
@@ -54,8 +68,9 @@ public class mouvement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal"); // Q/A = -1   |   D   = 1
         float moveVertical = Input.GetAxis("Vertical");     // S   = -1   |   Z/W = 1
 
-        Vector3 direction = (transform.right * moveHorizontal + transform.forward * moveVertical) * speed;
-        direction.y = _rigidbody.velocity.y;
+        Vector3 direction = (transform.right * moveHorizontal + transform.forward * moveVertical);
+        direction.Normalize();
+        direction = direction * speed;
         _rigidbody.velocity = direction;
     }
     
