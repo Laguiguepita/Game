@@ -33,6 +33,7 @@ public class PlayerManager : MonoBehaviour
             myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
             myPlayer.transform.Find("GameObject").gameObject.SetActive(true);
             myPlayer.GetComponent<mouvement>().enabled = true;
+            myPlayer.GetComponent<Player>().enabled = true;
         }
     }
 
