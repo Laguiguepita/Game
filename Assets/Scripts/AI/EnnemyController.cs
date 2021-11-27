@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnnemyController : MonoBehaviour
 {
@@ -17,7 +19,6 @@ public class EnnemyController : MonoBehaviour
     void Start()
     {
         targets = GameObject.FindGameObjectsWithTag("Player");
-        //target = PlayerManager.Instance.myPlayer.transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -37,6 +38,11 @@ public class EnnemyController : MonoBehaviour
         if (closestPlayerDistance < lookRadius)
         {
             agent.SetDestination(targets[closestPlayer].transform.position);
+            if (closestPlayerDistance <= agent.stoppingDistance)
+            {
+                //attack player
+                RPC_Damage();
+            }
         }
     }
 
@@ -44,5 +50,11 @@ public class EnnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    [PunRPC]
+    void RPC_Damage()
+    {
+        targets[closestPlayer].GetComponent<Player>().TakeDamage(10);
     }
 }

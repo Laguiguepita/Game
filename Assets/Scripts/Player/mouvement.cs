@@ -15,16 +15,9 @@ public class mouvement : MonoBehaviour
 
     
     [SerializeField] private Transform camAnchor;
-    [SerializeField] private float lookSensitivity;
-    [SerializeField] private bool invertYRotation;
     
-    // Pour verouiller la vue et éviter de faire des tours complets du personnage
-    private const float MinxLook = -15;
-    private const float MaxxLook = 60;
     private float _curXRot;
     
-    
-    PhotonView view;
 
     private Animator animator;
     public float jumpForce = 7;
@@ -40,8 +33,6 @@ public class mouvement : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         speed = 15;
-        lookSensitivity = 5;
-        
     }
 
 
@@ -50,9 +41,7 @@ public class mouvement : MonoBehaviour
     {
         bool iswalking = animator.GetBool("IsWalking");
         bool forwardPressed = Input.GetKey("w");
-        view = GetComponent<PhotonView>();
         Move();
-        LookAndMove();
         if (forwardPressed)
         {
             animator.SetBool("IsWalking",true);
@@ -78,16 +67,6 @@ public class mouvement : MonoBehaviour
         direction.Normalize();
         direction = direction * speed;
         _rigidbody.velocity = direction;
-    }
-    
-    private void LookAndMove()
-    {
-        transform.eulerAngles += Vector3.up * (Input.GetAxis("Mouse X") * lookSensitivity * 0.1f);
-        _curXRot += Input.GetAxis("Mouse Y") * lookSensitivity * 0.1f * (invertYRotation ? 1 : -1);
-
-        Vector3 clampedAngle = camAnchor.eulerAngles;
-        clampedAngle.x = Mathf.Clamp(_curXRot, MinxLook, MaxxLook);
-        camAnchor.eulerAngles = clampedAngle;
     }
 
 }

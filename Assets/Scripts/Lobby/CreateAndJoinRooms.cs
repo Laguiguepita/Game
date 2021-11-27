@@ -84,7 +84,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
     }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player player)
     {
         Debug.Log("A player left the room");
         if (PhotonNetwork.IsMasterClient)
