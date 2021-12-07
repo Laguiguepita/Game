@@ -116,7 +116,7 @@ public class CameraController : MonoBehaviour
     private float hOrbitInput;
     private float zoomInput;
     private float adjustementDistance = -8;
-    private bool smoothFollow = true;
+    private bool smoothFollow = false;
     public float smooth = 0.05f;
     
     public Vector3 camVel = Vector3.zero;
@@ -148,7 +148,7 @@ public class CameraController : MonoBehaviour
         LookAtTarget();
     }*/
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         //moving
         MoveToTarget();

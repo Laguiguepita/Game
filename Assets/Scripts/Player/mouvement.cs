@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Photon.Pun;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine.UI;
 
 public class mouvement : MonoBehaviour
@@ -44,6 +46,8 @@ public class mouvement : MonoBehaviour
         Move();
         if (forwardPressed)
         {
+            transform.rotation = Quaternion.Euler(0, camAnchor.rotation.eulerAngles.y , 0);
+            camAnchor.localEulerAngles = new Vector3(camAnchor.rotation.eulerAngles.x, 0, 0);
             animator.SetBool("IsWalking",true);
         }
         if(!forwardPressed)

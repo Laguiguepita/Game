@@ -30,13 +30,10 @@ public class MenuManager : MonoBehaviour
     }
 
     public void OpenMenu(Menu menu)
-    { 
-        for (int i = 0; i < menus.Length; i++)
+    {
+        foreach (var MENU in menus)
         {
-            if (menus[i].open)
-            {
-                CloseMenu(menus[i]);
-            }
+            CloseMenu(MENU);
         }
         menu.Open();
     }
