@@ -148,7 +148,7 @@ public class CameraController : MonoBehaviour
         LookAtTarget();
     }*/
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         //moving
         MoveToTarget();
