@@ -14,8 +14,8 @@ public class mouvement : MonoBehaviour
     
     // On serialize la variable speed pour pouvoir préciser sa valeur dans l'inspecteur
     [SerializeField] private float speed;
-
-    
+    [SerializeField] private Transform FeetTransform;
+    [SerializeField] private LayerMask floorMask;
     [SerializeField] private Transform camAnchor;
     
     private float _curXRot;
@@ -43,6 +43,7 @@ public class mouvement : MonoBehaviour
     {
         bool iswalking = animator.GetBool("IsWalking");
         bool forwardPressed = Input.GetKey("w");
+        bool backwardPressed = Input.GetKey("s");
         Move();
         if (forwardPressed)
         {
@@ -54,6 +55,14 @@ public class mouvement : MonoBehaviour
         {
             animator.SetBool("IsWalking",false);
         }
+        if (backwardPressed)
+        {
+            animator.SetBool("IsWalkingBack",true);
+        }
+        if(!backwardPressed)
+        {
+            animator.SetBool("IsWalkingBack",false);
+        }
     }
 
 
@@ -63,20 +72,22 @@ public class mouvement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal"); // Q/A = -1   |   D   = 1
         float moveVertical = Input.GetAxis("Vertical");     // S   = -1   |   Z/W = 1
 
-        Vector3 direction = (transform.right * moveHorizontal + transform.forward * moveVertical);
-        direction.Normalize();
-        direction = direction * speed;
-        _rigidbody.velocity = direction;
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"),0f, Input.GetAxis("Vertical"));
+        Vector3 direction = transform.TransformDirection(movement) * speed;
+        _rigidbody.velocity = new Vector3(direction.x, _rigidbody.velocity.y, direction.z);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _rigidbody.AddForce(Vector3.up*jumpForce,ForceMode.Impulse);
-            animator.SetBool("Jumped", true);
+            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                animator.SetBool("Jumped", true);
+            
         }
         else 
         {
             animator.SetBool("Jumped", false);
 
         }
+        
+        
     }
 
 }
