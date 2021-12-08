@@ -200,6 +200,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  FeetTransform: {fileID: 5031918611395997808}
+  floorMask:
+    serializedVersion: 2
+    m_Bits: 64
   camAnchor: {fileID: 6797806860792076842}
   jumpForce: 7
 --- !u!114 &2136463728150721444
@@ -574,6 +578,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: IsWalking
+  - Type: 4
+    SynchronizeType: 0
+    Name: Jumped
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsWalkingBack
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -894,5 +904,10 @@ Transform:
 --- !u!1 &5031918611395570740 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100046, guid: fa7f36c71b9e8fa4798df3a931c2fd92, type: 3}
+  m_PrefabInstance: {fileID: 5031918611395603194}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5031918611395997808 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400010, guid: fa7f36c71b9e8fa4798df3a931c2fd92, type: 3}
   m_PrefabInstance: {fileID: 5031918611395603194}
   m_PrefabAsset: {fileID: 0}
