@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  camAnchor: {fileID: 8657717414165739709}
-  jumpForce: 7
+  camAnchor: {fileID: 6797806860792076842}
+  jumpForce: 10
 --- !u!114 &2136463728150721444
 MonoBehaviour:
   m_ObjectHideFlags: 0

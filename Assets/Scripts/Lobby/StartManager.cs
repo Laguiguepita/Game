@@ -18,7 +18,7 @@ public class StartManager : MonoBehaviourPunCallbacks
         else
         {
             PhotonNetwork.SetLevelPrefix(5);
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(2);
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
@@ -33,7 +33,7 @@ public class StartManager : MonoBehaviourPunCallbacks
         else
         {
             PhotonNetwork.SetLevelPrefix(5);
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(2);
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
@@ -48,7 +48,7 @@ public class StartManager : MonoBehaviourPunCallbacks
         else
         {
             PhotonNetwork.SetLevelPrefix(5);
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(2);
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
     }
