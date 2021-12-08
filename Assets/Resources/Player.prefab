@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   camAnchor: {fileID: 6797806860792076842}
-  jumpForce: 10
+  jumpForce: 7
 --- !u!114 &2136463728150721444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &4017658153313456658
 MonoBehaviour:
