@@ -22,7 +22,7 @@ public class mouvement : MonoBehaviour
     
 
     private Animator animator;
-    public float jumpForce = 7;
+    [SerializeField] public float jumpForce = 40;
     
     // Start is called before the first frame update
     void Start()
@@ -32,8 +32,8 @@ public class mouvement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         
         // Enleve le curseur et le fixe au milieu de l'écran
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         speed = 15;
     }
 
@@ -54,10 +54,6 @@ public class mouvement : MonoBehaviour
         {
             animator.SetBool("IsWalking",false);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rigidbody.AddForce(Vector3.up*jumpForce,ForceMode.Impulse);
-        }
     }
 
 
@@ -71,6 +67,16 @@ public class mouvement : MonoBehaviour
         direction.Normalize();
         direction = direction * speed;
         _rigidbody.velocity = direction;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _rigidbody.AddForce(Vector3.up*jumpForce,ForceMode.Impulse);
+            animator.SetBool("Jumped", true);
+        }
+        else 
+        {
+            animator.SetBool("Jumped", false);
+
+        }
     }
 
 }
