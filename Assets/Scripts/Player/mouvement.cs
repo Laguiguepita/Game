@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Photon.Pun;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine.UI;
 
 public class mouvement : MonoBehaviour
@@ -19,6 +18,11 @@ public class mouvement : MonoBehaviour
     [SerializeField] private Transform camAnchor;
     
     private float _curXRot;
+    
+    //la position de l'arme
+    [SerializeField] public GameObject weapon;
+    
+    public gameManager manager;
     
 
     private Animator animator;
@@ -35,6 +39,8 @@ public class mouvement : MonoBehaviour
         UnityEngine.Cursor.visible = false;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         speed = 15;
+        manager = FindObjectOfType<gameManager>();
+        SpawnWeapon();
     }
 
 
@@ -86,8 +92,16 @@ public class mouvement : MonoBehaviour
             animator.SetBool("Jumped", false);
 
         }
-        
-        
+    }
+    
+    void SpawnWeapon()
+    {
+        GameObject mele = PhotonNetwork.Instantiate(manager.meleWeapons.GetComponent<MeleWeapons>().weapons[1].name, new Vector3(0,0,0), Quaternion.identity,0);
+        //GameObject mele = Instantiate(manager.meleWeapons.GetComponent<MeleWeapons>().weapons[0]);
+        mele.transform.parent = weapon.transform;
+        mele.transform.localPosition = Vector3.zero;
+        mele.transform.localEulerAngles = Vector3.zero;
+        mele.transform.localScale = new Vector3((float) 0.5, (float) 0.5, (float) 0.5);
     }
 
 }
